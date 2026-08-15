@@ -4,6 +4,8 @@ A browser rebuild of the 1986 DOS game **Major League Manager**, using **current
 
 Made by **Maybee Creations**. In honor of the 1986 original. **Darren Maybee**, with credit towards **Bob Gardner**.
 
+**Play now:** [major-league-manager-2026.vercel.app](https://major-league-manager-2026.vercel.app)
+
 Play it the old way: 80-column CGA color text, an ASCII diamond, named fielders, two result boxes, and a five-page newspaper box score.
 
 ## Play locally
