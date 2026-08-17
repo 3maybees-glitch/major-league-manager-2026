@@ -34,8 +34,10 @@ function scaleCanvas() {
     ? hint.getBoundingClientRect().height + parseFloat(getComputedStyle(hint).marginTop || "0")
     : 36;
   const gutter = 16;
-  const availW = window.innerWidth - gutter - frame.x;
-  const availH = window.innerHeight - gutter - frame.y - hintH;
+  const viewW = window.visualViewport?.width ?? window.innerWidth;
+  const viewH = window.visualViewport?.height ?? window.innerHeight;
+  const availW = viewW - gutter - frame.x;
+  const availH = viewH - gutter - frame.y - hintH;
 
   let cssW = Math.min(availW, MAX_CSS_W);
   let cssH = cssW * ASPECT;
