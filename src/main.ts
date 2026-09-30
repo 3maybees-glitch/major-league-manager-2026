@@ -2,6 +2,7 @@ import db from "./data/mlb2026.json";
 import type { Database } from "./engine/types";
 import "./styles.css";
 import { Terminal } from "./ui/cga";
+import { mountOnScreenKeyboard } from "./ui/osk";
 import { App } from "./ui/screens";
 
 const canvas = document.getElementById("screen") as HTMLCanvasElement;
@@ -29,15 +30,19 @@ function scaleCanvas() {
   const dpr = Math.min(2, window.devicePixelRatio || 1);
   const crt = document.getElementById("crt");
   const hint = document.querySelector(".hint") as HTMLElement | null;
+  const osk = document.getElementById("osk");
   const frame = frameSize(crt);
   const hintH = hint
     ? hint.getBoundingClientRect().height + parseFloat(getComputedStyle(hint).marginTop || "0")
     : 36;
+  const oskH = osk
+    ? osk.getBoundingClientRect().height + parseFloat(getComputedStyle(osk).marginTop || "0")
+    : 0;
   const gutter = 16;
   const viewW = window.visualViewport?.width ?? window.innerWidth;
   const viewH = window.visualViewport?.height ?? window.innerHeight;
   const availW = viewW - gutter - frame.x;
-  const availH = viewH - gutter - frame.y - hintH;
+  const availH = viewH - gutter - frame.y - hintH - oskH;
 
   let cssW = Math.min(availW, MAX_CSS_W);
   let cssH = cssW * ASPECT;
@@ -70,6 +75,22 @@ window.addEventListener("keydown", (e) => {
   app.key(e.key);
 });
 
+function touchish() {
+  return window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(hover: none)").matches;
+}
+
+canvas.addEventListener("pointerdown", (e) => {
+  canvas.focus();
+  if (!touchish()) return;
+  e.preventDefault();
+  app.key(" ");
+});
 canvas.addEventListener("click", () => canvas.focus());
 canvas.tabIndex = 0;
 canvas.focus();
+
+const oskRoot = document.getElementById("osk");
+ if (oskRoot) {
+  mountOnScreenKeyboard(oskRoot, (key) => app.key(key));
+  requestAnimationFrame(scaleCanvas);
+}
