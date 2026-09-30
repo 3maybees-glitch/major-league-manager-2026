@@ -5,6 +5,7 @@ html, body {
   background: #050505;
   color: #8a8;
   font-family: "Segoe UI", system-ui, sans-serif;
+  touch-action: manipulation;
 }
 body {
   display: flex;
@@ -57,8 +58,80 @@ body {
   max-width: 560px;
   flex-shrink: 0;
 }
+#osk {
+  width: min(100%, 560px);
+  flex-shrink: 0;
+  margin-top: 8px;
+  padding-bottom: max(4px, env(safe-area-inset-bottom));
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.osk-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+.osk-toggle,
+.osk-abc {
+  font: 600 11px/1 ui-monospace, "Cascadia Code", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #55ff55;
+  background: #041204;
+  border: 1px solid #2a8a2a;
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-height: 36px;
+}
+.osk-panel {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+  background: #050a05;
+  border: 1px solid #1a4a1a;
+  border-radius: 8px;
+}
+#osk.is-open .osk-panel { display: flex; }
+.osk-group { display: flex; flex-direction: column; gap: 3px; }
+.osk-label {
+  font: 600 9px/1 ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  color: #3a7a3a;
+}
+.osk-row { display: flex; gap: 4px; }
+.osk-key {
+  flex: 1;
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 2px;
+  font: 700 13px/1 ui-monospace, "Cascadia Code", monospace;
+  color: #55ff55;
+  background: #0a1a0a;
+  border: 1px solid #2a6a2a;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 #061006;
+}
+.osk-key--nav { color: #55ffff; border-color: #2a6a6a; }
+.osk-key--mod {
+  color: #ffff55;
+  border-color: #6a6a2a;
+  flex: 2;
+}
+.osk-key--cmd { color: #55ff55; }
+.osk-key.is-down,
+.osk-key:active {
+  background: #55ff55;
+  color: #031003;
+  box-shadow: none;
+  transform: translateY(1px);
+}
 @media (max-width: 700px) {
   #crt { padding: 6px; border-width: 4px; }
   #crt::after { inset: 6px; }
-  .hint { padding: 0 12px; }
+  .hint { padding: 0 12px; font-size: 11px; }
+  body { justify-content: flex-start; padding: 4px; overflow: auto; }
+  .osk-key { min-height: 42px; font-size: 14px; }
 }
