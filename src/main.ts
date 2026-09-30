@@ -90,7 +90,10 @@ canvas.tabIndex = 0;
 canvas.focus();
 
 const oskRoot = document.getElementById("osk");
- if (oskRoot) {
+if (oskRoot) {
   mountOnScreenKeyboard(oskRoot, (key) => app.key(key));
   requestAnimationFrame(scaleCanvas);
 }
+
+// Phones have no keyboard — leave the splash up briefly, then enter the menu.
+window.setTimeout(() => app.key(" "), 1400);
