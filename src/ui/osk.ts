@@ -36,10 +36,10 @@ const OTHER: KeyDef[] = [
 
 const NAV: KeyDef[] = [
   { label: "ESC", key: "Escape", kind: "nav" },
-  { label: "↑", key: "ArrowUp", kind: "nav" },
-  { label: "↓", key: "ArrowDown", kind: "nav" },
-  { label: "PG↑", key: "PageUp", kind: "nav" },
-  { label: "PG↓", key: "PageDown", kind: "nav" },
+  { label: "UP", key: "ArrowUp", kind: "nav" },
+  { label: "DN", key: "ArrowDown", kind: "nav" },
+  { label: "PGUP", key: "PageUp", kind: "nav" },
+  { label: "PGDN", key: "PageDown", kind: "nav" },
   { label: "SPACE", key: " ", span: 2, kind: "mod" },
   { label: "ENTER", key: "Enter", span: 2, kind: "mod" },
 ];
@@ -48,7 +48,7 @@ const QWERTY: KeyDef[][] = [
   [..."QWERTYUIOP"].map((c) => ({ label: c, key: c.toLowerCase() })),
   [..."ASDFGHJKL"].map((c) => ({ label: c, key: c.toLowerCase() })),
   [
-    { label: "⌫", key: "Backspace", kind: "nav" },
+    { label: "BKSP", key: "Backspace", kind: "nav" },
     ...[..."ZXCVBNM"].map((c) => ({ label: c, key: c.toLowerCase() })),
     { label: "ENTER", key: "Enter", span: 2, kind: "mod" },
   ],
@@ -69,7 +69,7 @@ function btn(def: KeyDef) {
   el.textContent = def.label;
   el.dataset.key = def.key;
   if (def.span) el.style.flex = String(def.span);
-  el.setAttribute("aria-label", def.label === "⌫" ? "Backspace" : def.label);
+  el.setAttribute("aria-label", def.label === "BKSP" ? "Backspace" : def.label);
   return el;
 }
 
