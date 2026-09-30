@@ -96,4 +96,6 @@ if (oskRoot) {
 }
 
 // Phones have no keyboard — leave the splash up briefly, then enter the menu.
-window.setTimeout(() => app.key(" "), 1400);
+window.setTimeout(() => {
+  if (app.mode === "title") app.key(" ");
+}, 1400);
